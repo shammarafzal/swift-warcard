@@ -14,7 +14,7 @@ struct ContentView: View {
                 Image("toronto")
                     .cornerRadius(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)
                 VStack{
-                    Text("CN Tower").font(.title).foregroundColor(Color.white)
+                    Text("CN Tower.").font(.title).foregroundColor(Color.white)
                     Text("Toronto").font(.subheadline).foregroundColor(Color.white)
                     
                 }
@@ -27,7 +27,7 @@ struct ContentView: View {
                 Image("london")
                     .cornerRadius(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)
                 VStack{
-                    Text("Big Ben").font(.title).foregroundColor(Color.white)
+                    Text("Big Ben.").font(.title).foregroundColor(Color.white)
                     Text("London").font(.subheadline).foregroundColor(Color.white)
                     
                 }
