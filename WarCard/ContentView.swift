@@ -8,33 +8,92 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var playerCard = "card5"
+    @State private var cpuCard = "card9"
+    @State private var playerScore = 0
+    @State private var cpuScore = 0
+    @State private var showingAlert = false
+    @State private var won = ""
     var body: some View {
-        VStack{
-            ZStack{
-                Image("toronto")
-                    .cornerRadius(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)
-                VStack{
-                    Text("CN Tower.").font(.title).foregroundColor(Color.white)
-                    Text("Toronto").font(.subheadline).foregroundColor(Color.white)
-                    
+        ZStack{
+            Image("background").resizable()
+                .ignoresSafeArea()
+            VStack{
+                Spacer()
+                Image("logo")
+                Spacer()
+                HStack{
+                    Spacer()
+                    Image(playerCard)
+                    Spacer()
+                    Image(cpuCard)
+                    Spacer()
                 }
-              
-                .padding(/*@START_MENU_TOKEN@*/.all, 20.0/*@END_MENU_TOKEN@*/).background(Color.black.opacity(0.7))
-            }
-            
-            
-            ZStack{
-                Image("london")
-                    .cornerRadius(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)
-                VStack{
-                    Text("Big Ben.").font(.title).foregroundColor(Color.white)
-                    Text("London").font(.subheadline).foregroundColor(Color.white)
+                Spacer()
+                Button(action: {
+                    let playerRand = Int.random(in: 2...14)
+                    let cpuRand = Int.random(in: 2...14)
+                    playerCard = "card" + String(playerRand)
+                    cpuCard = "card" + String(cpuRand)
+                    if(playerRand > cpuRand){
+                        playerScore += 1
+                    }
+                    else if(cpuRand > playerRand){
+                        cpuScore += 1
+                    }
+                    else{
+                        print("Tie")
+                    }
+                    if(playerScore >= 10){
+                        showingAlert = true
+                        playerScore = 0
+                        cpuScore = 0
+                        won = "Player Win"
+                        
+                    }
+                    else if (cpuScore >= 10){
+                        showingAlert = true
+                        playerScore = 0
+                        cpuScore = 0
+                        won = "CPU Win"
+                    }
                     
+                }, label: {
+                    Image("dealbutton")
+                }).alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Important message"), message: Text(won), dismissButton: .default(Text("Got it!")))
                 }
-              
-                .padding(/*@START_MENU_TOKEN@*/.all, 20.0/*@END_MENU_TOKEN@*/).background(Color.black.opacity(0.7))
+                Spacer()
+                HStack{
+                    Spacer()
+                    VStack{
+
+                        Text("Player").font(.headline).foregroundColor(Color.white).padding(.bottom)
+
+                        Text(String(playerScore)).font(.largeTitle).foregroundColor(Color.white).padding(.bottom)
+
+                    }
+                    Spacer()
+                    VStack{
+
+                        Text("CPU").font(.headline).foregroundColor(Color.white).padding(.bottom)
+
+                        Text(String(cpuScore)).font(.largeTitle).foregroundColor(Color.white).padding(.bottom)
+
+                    }
+                    Spacer()
+                }
+                Spacer()
+
             }
+            Spacer()
+
+
+
+
     }
+
 }
 }
 
